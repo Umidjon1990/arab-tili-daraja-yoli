@@ -1,0 +1,12 @@
+{
+  "name": "arab-tili-daraja-yoli-loader",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "bash railway-bootstrap.sh build",
+    "start": "bash railway-bootstrap.sh start"
+  }
+}
