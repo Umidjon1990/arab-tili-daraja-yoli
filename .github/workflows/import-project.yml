@@ -1,0 +1,33 @@
+name: Import project history
+
+on:
+  push:
+    branches:
+      - importer
+    paths:
+      - .import/ready
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout importer branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore and verify Git bundle
+        shell: bash
+        run: |
+          cat .import/site.bundle.part-* > /tmp/site.bundle
+          git bundle verify /tmp/site.bundle
+
+      - name: Publish the complete project history
+        shell: bash
+        run: |
+          git fetch /tmp/site.bundle main:refs/heads/project-main
+          git push --force origin refs/heads/project-main:refs/heads/main
+
