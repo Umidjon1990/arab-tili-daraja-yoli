@@ -12,8 +12,7 @@ restore_app() {
   rm -f "$BUNDLE_PATH"
   rm -rf "$APP_DIR"
   cat .import/site.bundle.part-* > "$BUNDLE_PATH"
-  git bundle verify "$BUNDLE_PATH" >/dev/null
-  git clone --quiet "$BUNDLE_PATH" "$APP_DIR"
+  git clone --quiet --branch main "$BUNDLE_PATH" "$APP_DIR"
 }
 
 case "${1:-}" in
